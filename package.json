@@ -1,0 +1,22 @@
+{
+  "type": "module",
+  "name": "sakila-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ajv": "^8.6.3",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "knex": "^0.95.11",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.0"
+  }
+}
