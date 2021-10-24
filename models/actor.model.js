@@ -1,10 +1,11 @@
 import db from "../utils/db.js";
 
 const TABLE_NAME = "actor";
+const FILM_ACTOR_TABLE_NAME = "film_actor";
 const TABLE_ID = "actor_id";
 
-export function findAll() {
-  return db(TABLE_NAME);
+export async function findAll() {
+  return await db(TABLE_NAME);
 }
 
 export async function findById(id) {
@@ -14,14 +15,16 @@ export async function findById(id) {
   return list[0];
 }
 
-export function add(actor) {
-  return db(TABLE_NAME).insert(actor);
+export async function add(actor) {
+  return await db(TABLE_NAME).insert(actor);
 }
 
-export function del(id) {
-  return db(TABLE_NAME).where(TABLE_ID, id).del();
+export async function del(id) {
+  await db(FILM_ACTOR_TABLE_NAME).where(TABLE_ID, id).del();
+
+  return await db(TABLE_NAME).where(TABLE_ID, id).del();
 }
 
-export function patch(id, actor) {
-  return db(TABLE_NAME).where(TABLE_ID, id).update(actor);
+export async function patch(id, actor) {
+  return await db(TABLE_NAME).where(TABLE_ID, id).update(actor);
 }

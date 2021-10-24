@@ -1,5 +1,6 @@
 import express from "express";
 import morgan from "morgan";
+import cors from "cors";
 import asyncError from "express-async-errors";
 
 import filmRouter from "./routes/film.route.js";
@@ -9,6 +10,7 @@ import customerRouter from "./routes/customer.route.js";
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
@@ -34,7 +36,7 @@ app.use(function (err, req, res, next) {
   });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3030;
 app.listen(PORT, function () {
   console.log(`Sakila API is listening at http://localhost:${PORT}`);
 });

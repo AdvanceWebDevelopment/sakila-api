@@ -1,10 +1,12 @@
 import db from "../utils/db.js";
 
 const TABLE_NAME = "customer";
+const PAYMENT_TABLE_NAME = "payment";
+const RENTAL_TABLE_NAME = "rental";
 const TABLE_ID = "customer_id";
 
-export function findAll() {
-  return db(TABLE_NAME);
+export async function findAll() {
+  return await db(TABLE_NAME);
 }
 
 export async function findById(id) {
@@ -14,14 +16,18 @@ export async function findById(id) {
   return list[0];
 }
 
-export function add(customer) {
-  return db(TABLE_NAME).insert(customer);
+export async function add(customer) {
+  return await db(TABLE_NAME).insert(customer);
 }
 
-export function del(id) {
-  return db(TABLE_NAME).where(TABLE_ID, id).del();
+export async function del(id) {
+  Promise.all([
+    await db(PAYMENT_TABLE_NAME).where(TABLE_ID, id).del(),
+    await db(RENTAL_TABLE_NAME).where(TABLE_ID, id).del(),
+  ]);
+  return await db(TABLE_NAME).where(TABLE_ID, id).del();
 }
 
-export function patch(id, customer) {
-  return db(TABLE_NAME).where(TABLE_ID, id).update(customer);
+export async function patch(id, customer) {
+  return await db(TABLE_NAME).where(TABLE_ID, id).update(customer);
 }
