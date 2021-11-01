@@ -3,6 +3,8 @@ import morgan from "morgan";
 import cors from "cors";
 import asyncError from "express-async-errors";
 
+import { auth as authTokenMdw } from "./middlewares/auth.mdw.js";
+import authRouter from "./routes/auth.route.js";
 import filmRouter from "./routes/film.route.js";
 import categoryRouter from "./routes/category.route.js";
 import actorRouter from "./routes/actor.route.js";
@@ -14,6 +16,8 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
+app.use("/api/auth/", authRouter);
+app.use(authTokenMdw);
 app.use("/api/films/", filmRouter);
 app.use("/api/categories/", categoryRouter);
 app.use("/api/actors/", actorRouter);

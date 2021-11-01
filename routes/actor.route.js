@@ -3,9 +3,7 @@ import { readFile } from "fs/promises";
 import validate from "../middlewares/validate.mdw.js";
 import * as actorModel from "../models/actor.model.js";
 
-const schema = JSON.parse(
-  await readFile(new URL("../schemas/actor.json", import.meta.url))
-);
+const schema = JSON.parse(await readFile(new URL("../schemas/actor.json", import.meta.url)));
 
 const router = express.Router();
 
